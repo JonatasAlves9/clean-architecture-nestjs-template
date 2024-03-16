@@ -16,4 +16,19 @@ export class AuthService {
 
     return result;
   }
+
+  async getMenu() {
+    return [
+      {
+        title: 'Home',
+        url: '/home',
+        icon: 'home',
+      },
+      {
+        title: 'Users',
+        url: '/users',
+        icon: 'people',
+      },
+    ];
+  }
 }
