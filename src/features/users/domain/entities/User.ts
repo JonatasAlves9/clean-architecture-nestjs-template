@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/shared/base/baseEntity';
+import { BaseEntity } from '@shared/base/baseEntity';
 
 export class User extends BaseEntity {
   id: string;
