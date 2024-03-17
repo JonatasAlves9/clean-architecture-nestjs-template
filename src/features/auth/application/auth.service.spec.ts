@@ -1,31 +1,30 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { JwtServiceContract } from '@shared/abstractions/jwt-service';
 import { UsersService } from '@features/users/application/users.service';
+import { User } from '@features/users/domain/entities/User';
 
-describe('AuthService', () => {
-  let authService: AuthService;
-  let jwtServiceMock: Partial<JwtServiceContract>;
-  let usersServiceMock: Partial<UsersService>;
+describe('UserService', () => {
+  let userService: UsersService;
 
-  beforeEach(async () => {
-    // Criar um módulo de teste com AuthService e fornecer os serviços e mocks necessários
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        AuthService,
-        { provide: JwtServiceContract, useValue: jwtServiceMock },
-        { provide: UsersService, useValue: usersServiceMock },
-      ],
-    }).compile();
-
-    // Obter uma instância do AuthService do módulo de teste
-    authService = module.get<AuthService>(AuthService);
+  beforeEach(() => {
+    // Inicialize a instância do UserService
+    userService = new UsersService();
   });
 
   it('should be defined', () => {
-    // Verificar se o serviço AuthService está definido
-    expect(authService).toBeDefined();
+    // Verifique se a instância do UserService está definida
+    expect(userService).toBeDefined();
   });
+  it('should get user by username', async () => {
+    // Mock de dados do usuário
+    const username = 'maria';
+    const expectedUser: User = new User('2', 'maria', 'maria', '', 'guess');
 
-  // Escreva outros testes para os métodos do AuthService aqui
+    // Espie a função getUserById para retornar o usuário esperado
+    jest
+      .spyOn(userService, 'findByUsername')
+      .mockResolvedValue(expectedUser as never);
+
+    // Chame o método getUserById e verifique se retorna o usuário esperado
+    const user = await userService.findByUsername(username);
+    expect(user).toEqual(expectedUser);
+  });
 });

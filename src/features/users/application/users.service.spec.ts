@@ -20,9 +20,14 @@ describe('UsersService', () => {
   it('should return user by username', () => {
     service.findByUsername('maria');
     expect(service.findByUsername('maria')).toEqual({
-      userId: 2,
+      id: '2',
+      name: 'maria',
       username: 'maria',
       password: 'guess',
+      email: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
     });
   });
 });

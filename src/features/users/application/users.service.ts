@@ -1,19 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../domain/dto/create-user.dto';
 import { UpdateUserDto } from '../domain/dto/update-user.dto';
+import { User } from '../domain/entities/User';
 
 @Injectable()
 export class UsersService {
-  private readonly users = [
+  private readonly users: User[] = [
     {
-      userId: 1,
+      id: '1',
+      name: 'john',
       username: 'john',
       password: 'changeme',
+      email: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
     },
     {
-      userId: 2,
+      id: '2',
+      name: 'maria',
       username: 'maria',
       password: 'guess',
+      email: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
     },
   ];
 
@@ -30,7 +41,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  findByUsername(username: string) {
+  findByUsername(username: string): User | undefined {
     return this.users.find((user) => user.username === username);
   }
 
