@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtServiceWrapper } from './infra/services/nest-jwt-service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
+import { AuthGuard } from './infra/services/nest-auth-guard';
 
 @Module({
   imports: [
@@ -28,6 +29,10 @@ import { JwtServiceContract } from '@shared/abstractions/jwt-service';
     {
       provide: JwtServiceContract,
       useClass: JwtServiceWrapper,
+    },
+    {
+      provide: 'APP_GUARD',
+      useClass: AuthGuard,
     },
   ],
   controllers: [AuthController, MenuController],
