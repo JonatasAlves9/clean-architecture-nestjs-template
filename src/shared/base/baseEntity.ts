@@ -1,5 +1,7 @@
 export abstract class BaseEntity {
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
+  id: string;
+  created_by: number;
+  updated_by: number | null;
+  created_at: Date;
+  updated_at: Date | null;
 }

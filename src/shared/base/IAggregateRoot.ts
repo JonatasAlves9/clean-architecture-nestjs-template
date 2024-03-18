@@ -1,5 +1,6 @@
 export interface IAggregateRoot {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  created_by: number;
+  updated_at: Date;
 }

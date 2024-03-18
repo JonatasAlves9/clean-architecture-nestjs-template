@@ -15,7 +15,6 @@ export type PersonProps = {
 };
 
 export class Pessoa extends BaseEntity {
-  id: number;
   hashid: UUID;
   cpf: string;
   nome: string;
@@ -50,10 +49,6 @@ export class Pessoa extends BaseEntity {
   reset_password_token: string;
   reset_password_sent_at: Date;
   user_token_app: string;
-  created_at: Date;
-  created_by: number;
-  updated_at: Date;
-  updated_by: number;
   token_2fa: string;
   token_sent_at: Date;
   arquivo_cv_id: number;
@@ -69,20 +64,4 @@ export class Pessoa extends BaseEntity {
   valor_hora: number;
   dt_cadastro_app: Date;
   ip_cadastro_app: string;
-
-  constructor(
-    id: UUID,
-    name: string,
-    username: string,
-    email: string,
-    password: string,
-  ) {
-    super();
-
-    this.hashid = id;
-    this.nome = name;
-    this.username = username;
-    this.email = email;
-    this.password = password;
-  }
 }
