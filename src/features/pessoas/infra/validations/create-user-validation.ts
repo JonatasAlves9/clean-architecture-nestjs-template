@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@features/users/domain/dto/create-user.dto';
+import { CreateUserDto } from '@features/pessoas/domain/dto/create-user.dto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
+import { UsersService } from './person.service';
 import { CreateUserValidationProvider } from '../infra/validations/create-user-validation';
 
 describe('UsersService', () => {

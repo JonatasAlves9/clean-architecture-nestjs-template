@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // Modules
-import { UsersModule } from '@features/users/users.module';
+import { UsersModule } from '@features/pessoas/users.module';
 import { AuthModule } from '@features/auth/auth.module';
 import { OrganizationsModule } from '@features/organizations/organizations.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserSchema } from '@features/pessoas/infra/db/typeorm/schemas/person/person.schema';
 
 @Module({
   imports: [
@@ -25,12 +26,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [],
+        entities: [UserSchema],
       }),
       inject: [ConfigService],
     }),
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {}

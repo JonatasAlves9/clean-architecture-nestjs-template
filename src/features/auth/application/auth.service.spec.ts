@@ -1,5 +1,5 @@
-import { UsersService } from '@features/users/application/users.service';
-import { User } from '@features/users/domain/entities/User';
+import { UsersService } from '@features/pessoas/application/person.service';
+import { Pessoa } from '@features/pessoas/domain/entities/Person';
 
 describe('UserService', () => {
   let userService: UsersService;
@@ -16,7 +16,7 @@ describe('UserService', () => {
   it('should get user by username', async () => {
     // Mock de dados do usuário
     const username = 'maria';
-    const expectedUser: User = new User('2', 'maria', 'maria', '', 'guess');
+    const expectedUser: Pessoa = new Pessoa('2', 'maria', 'maria', '', 'guess');
 
     // Espie a função getUserById para retornar o usuário esperado
     jest

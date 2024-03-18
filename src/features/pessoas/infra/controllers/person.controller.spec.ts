@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersController } from './users.controller';
-import { UsersService } from '../../application/users.service';
+import { UsersController } from './perosn.controller';
+import { UsersService } from '../../application/person.service';
 import { CreateUserValidationProvider } from '../validations/create-user-validation';
 
 describe('UsersController', () => {

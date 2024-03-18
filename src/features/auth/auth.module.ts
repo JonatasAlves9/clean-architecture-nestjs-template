@@ -1,17 +1,20 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtServiceContract } from '@shared/abstractions/jwt-service';
+import { UsersModule } from '../pessoas/users.module';
 import { AuthService } from './application/auth.service';
 import { AuthController } from './infra/controllers/auth.controller';
-import { UsersModule } from '../users/users.module';
 import { MenuController } from './infra/controllers/menu.controller';
-import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from './infra/services/local.strategy';
 import { JwtServiceWrapper } from './infra/services/nest-jwt-service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtServiceContract } from '@shared/abstractions/jwt-service';
-import { AuthGuard } from './infra/services/nest-auth-guard';
+import { SessionSerializer } from './infra/services/session.serializer';
+import { AuthenticatedGuard } from './infra/services/authentication.guard';
 
 @Module({
   imports: [
-    UsersModule, // Importe o UsersModule antes de qualquer outro módulo
+    UsersModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -23,6 +26,7 @@ import { AuthGuard } from './infra/services/nest-auth-guard';
       inject: [ConfigService],
     }),
     ConfigModule.forRoot(),
+    PassportModule.register({ session: true }),
   ],
   providers: [
     AuthService,
@@ -32,8 +36,10 @@ import { AuthGuard } from './infra/services/nest-auth-guard';
     },
     {
       provide: 'APP_GUARD',
-      useClass: AuthGuard,
+      useClass: AuthenticatedGuard,
     },
+    LocalStrategy,
+    SessionSerializer,
   ],
   controllers: [AuthController, MenuController],
 })

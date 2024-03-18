@@ -1,33 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../domain/dto/create-user.dto';
 import { UpdateUserDto } from '../domain/dto/update-user.dto';
-import { User } from '../domain/entities/User';
+import { Pessoa } from '../domain/entities/Person';
+import { FindUserByUsernameUseCase } from './find-person-by-username';
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [
-    {
-      id: '1',
-      name: 'john',
-      username: 'john',
-      password: 'changeme',
-      email: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    },
-    {
-      id: '2',
-      name: 'maria',
-      username: 'maria',
-      password: 'guess',
-      email: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    },
-  ];
-
+  constructor(private findUserByUsername: FindUserByUsernameUseCase) {}
   create(createUserDto: CreateUserDto) {
     console.log(createUserDto);
     return 'This action adds a new user';
@@ -41,8 +20,8 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  findByUsername(username: string): User | undefined {
-    return this.users.find((user) => user.username === username);
+  findByUsername(username: string): Promise<Pessoa | null> {
+    return this.findUserByUsername.execute({ username });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
