@@ -1,19 +1,6 @@
 import { BaseEntity } from '@shared/base/baseEntity';
 import { UUID } from 'crypto';
 
-export type PersonProps = {
-  id: UUID;
-  nome: string;
-  email: string;
-  password: string;
-  cpf: string;
-  telefone: string;
-  dt_nascimento: Date;
-  rg: string;
-  sexo: string;
-  logradouro: string;
-};
-
 export class Pessoa extends BaseEntity {
   hashid: UUID;
   cpf: string;

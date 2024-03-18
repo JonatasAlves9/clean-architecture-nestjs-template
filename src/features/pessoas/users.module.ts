@@ -29,7 +29,6 @@ import { UserSchema } from './infra/db/typeorm/schemas/person/person.schema';
       },
       inject: [PersonTypeOrmRepository],
     },
-    // Validator
     CreateUserValidationProvider,
   ],
   exports: [UsersService],
