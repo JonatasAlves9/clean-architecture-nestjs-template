@@ -1,4 +1,5 @@
 import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
+import { Semestre } from '@features/entidade/domain/entities/semestre.entity';
 import { EntitySchema as TypeORMSchema } from 'typeorm';
 
 export const EntidadeSchema = new TypeORMSchema<Entidade>({
@@ -107,15 +108,12 @@ export const EntidadeSchema = new TypeORMSchema<Entidade>({
       type: Number,
     },
   },
-  // relations: {
-  //   profiles: {
-  //     type: 'many-to-many',
-  //     target: 'organization',
-  //     joinTable: {
-  //       name: 'pessoa_perfil',
-  //       joinColumn: { name: 'entidade_id' },
-  //       inverseJoinColumn: { name: 'id' },
-  //     },
-  //   },
-  // },
+  relations: {
+    semestres: {
+      type: 'one-to-many',
+      target: () => Semestre,
+      inverseSide: 'entidade',
+      joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
+    },
+  },
 });

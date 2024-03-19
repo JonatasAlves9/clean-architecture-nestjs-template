@@ -15,16 +15,10 @@ import { PersonProfileSchema } from './infra/db/typeorm/schemas/person_profile/p
 import { FindProfilesByIdUseCase } from './application/usecases/find-profiles-by-id';
 import { PersonProfileRepositoryInterface } from './domain/repositories/person-profile.repository';
 import { ProfileSchema } from './infra/db/typeorm/schemas/profile/profile.schema';
-import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/entity.schema';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      UserSchema,
-      EntidadeSchema,
-      PersonProfileSchema,
-      ProfileSchema,
-    ]),
+    TypeOrmModule.forFeature([UserSchema, PersonProfileSchema, ProfileSchema]),
   ],
   controllers: [UsersController],
   providers: [

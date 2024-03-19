@@ -6,4 +6,5 @@ export abstract class BaseEntity {
   updated_at: Date | null;
   deleted_at: Date | null;
   deleted_by: number;
+  created_ip?: string;
 }

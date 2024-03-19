@@ -12,6 +12,7 @@ export class PersonTypeOrmRepository implements PersonRepositoryInterface {
       .leftJoinAndSelect('pessoa.profiles', 'profiles')
       .leftJoinAndSelect('profiles.profile', 'profile')
       .leftJoinAndSelect('profiles.entidade', 'entidade')
+      .leftJoinAndSelect('entidade.semestres', 'semestres')
       .getOne();
   }
 }

@@ -9,7 +9,8 @@ import { PersonProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/
 import { ProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/profile/profile.schema';
 import { UsersModule } from '@features/pessoas/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/entity.schema';
+import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/entidade/entity.schema';
+import { SemestreSchema } from '@features/entidade/infra/db/typeorm/schemas/semestre/semestre.schema';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/enti
           ProfileSchema,
           PersonProfileSchema,
           EntidadeSchema,
+          SemestreSchema,
         ],
       }),
       inject: [ConfigService],

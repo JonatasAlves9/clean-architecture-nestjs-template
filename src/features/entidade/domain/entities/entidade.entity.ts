@@ -1,5 +1,5 @@
-import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
 import { BaseEntity } from '@shared/base/baseEntity';
+import { Semestre } from './semestre.entity';
 
 export class Entidade extends BaseEntity {
   tipo_entidade_id: number;
@@ -29,5 +29,5 @@ export class Entidade extends BaseEntity {
   suporte: string;
 
   // Relations
-  profiles: PersonProfile[];
+  semestres: Semestre[];
 }
