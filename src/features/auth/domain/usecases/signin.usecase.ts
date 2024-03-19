@@ -1,3 +1,3 @@
 export interface SignInUseCaseInterface {
-  execute(username: string, password: string): Promise<any | null>;
+  execute(cpf: string, password: string): Promise<any | null>;
 }

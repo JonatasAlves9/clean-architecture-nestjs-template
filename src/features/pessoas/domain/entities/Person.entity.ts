@@ -1,5 +1,6 @@
 import { BaseEntity } from '@shared/base/baseEntity';
 import { UUID } from 'crypto';
+import { PersonProfile } from '../aggregates/PersonProfile.aggregate';
 
 export class Pessoa extends BaseEntity {
   hashid: UUID;
@@ -51,6 +52,8 @@ export class Pessoa extends BaseEntity {
   valor_hora: number;
   dt_cadastro_app: Date;
   ip_cadastro_app: string;
+
+  profiles: PersonProfile[];
 
   constructor(pessoa: Partial<Pessoa>) {
     super();
