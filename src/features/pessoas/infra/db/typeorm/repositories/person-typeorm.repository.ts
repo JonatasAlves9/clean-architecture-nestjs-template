@@ -5,7 +5,7 @@ import { Pessoa } from '@features/pessoas/domain/entities/person.entity';
 export class PersonTypeOrmRepository implements PersonRepositoryInterface {
   constructor(private ormRepo: Repository<Pessoa>) {}
 
-  findByUsername(username: string): Promise<Pessoa | null> {
+  findByCPF(username: string): Promise<Pessoa | null> {
     return this.ormRepo
       .createQueryBuilder('pessoa')
       .where('pessoa.username = :username', { username })

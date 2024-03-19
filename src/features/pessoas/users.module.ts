@@ -42,11 +42,8 @@ import { ProfileSchema } from './infra/db/typeorm/schemas/profile/profile.schema
 
     {
       provide: FindUserByUsernameUseCase,
-      useFactory: (
-        userRepo: PersonRepositoryInterface,
-        personProfileRepo: PersonProfileRepositoryInterface,
-      ) => {
-        return new FindUserByUsernameUseCase(userRepo, personProfileRepo);
+      useFactory: (userRepo: PersonRepositoryInterface) => {
+        return new FindUserByUsernameUseCase(userRepo);
       },
       inject: [PersonTypeOrmRepository, PersonProfileTypeOrmRepository],
     },

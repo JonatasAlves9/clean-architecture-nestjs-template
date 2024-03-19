@@ -19,7 +19,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
   ) {}
 
   async execute(cpf: string, password: string): Promise<any | null> {
-    const user = await this.usersService.findByUsername(cpf);
+    const user = await this.usersService.findByCPF(cpf);
 
     if (!user || user.ativo === false) {
       throw new NotFoundException('Usuário não encontrado');
