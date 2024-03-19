@@ -2,14 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // Modules
-import { UsersModule } from '@features/pessoas/users.module';
 import { AuthModule } from '@features/auth/auth.module';
 import { OrganizationsModule } from '@features/organizations/organizations.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserSchema } from '@features/pessoas/infra/db/typeorm/schemas/person/person.schema';
 import { PersonProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/person_profile/person_profile.schema';
 import { ProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/profile/profile.schema';
-import { Argon2CryptService } from '@shared/services/argon2-crypt';
+import { UsersModule } from '@features/pessoas/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
