@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './person.service';
-import { CreateUserValidationProvider } from '../infra/validations/create-user-validation';
+import { UsersService } from '../services/person.service';
+import { CreateUserValidationProvider } from '../../infra/validations/create-user-validation';
 
 describe('UsersService', () => {
   let service: UsersService;

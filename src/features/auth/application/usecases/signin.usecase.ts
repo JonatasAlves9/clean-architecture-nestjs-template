@@ -1,5 +1,5 @@
 import { SignInUseCaseInterface } from '@features/auth/domain/usecases/signin.usecase';
-import { UsersService } from '@features/pessoas/application/person.service';
+import { UsersService } from '@features/pessoas/application/services/person.service';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
 import * as argon from 'argon2';

@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { PersonRepositoryInterface } from '@features/pessoas/domain/repositories/person.repository';
-import { Pessoa } from '@features/pessoas/domain/entities/Person.entity';
+import { Pessoa } from '@features/pessoas/domain/entities/person.entity';
 
 export class PersonTypeOrmRepository implements PersonRepositoryInterface {
   constructor(private ormRepo: Repository<Pessoa>) {}

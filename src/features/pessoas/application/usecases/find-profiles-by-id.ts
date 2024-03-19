@@ -1,5 +1,5 @@
-import { PersonProfile } from '../domain/aggregates/PersonProfile.aggregate';
-import { PersonProfileRepositoryInterface } from '../domain/repositories/person-profile.repository';
+import { PersonProfile } from '../../domain/aggregates/PersonProfile.aggregate';
+import { PersonProfileRepositoryInterface } from '../../domain/repositories/person-profile.repository';
 
 export class FindProfilesByIdUseCase {
   constructor(private routeRepo: PersonProfileRepositoryInterface) {}

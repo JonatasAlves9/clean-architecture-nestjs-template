@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from '../domain/dto/create-user.dto';
-import { UpdateUserDto } from '../domain/dto/update-user.dto';
-import { Pessoa } from '../domain/entities/Person.entity';
-import { FindUserByUsernameUseCase } from './find-person-by-username';
-import { FindProfilesByIdUseCase } from './find-profiles-by-id';
+import { CreateUserDto } from '../../domain/dto/create-user.dto';
+import { UpdateUserDto } from '../../domain/dto/update-user.dto';
+import { Pessoa } from '../../domain/entities/person.entity';
+import { FindUserByUsernameUseCase } from '../usecases/find-person-by-username';
+import { FindProfilesByIdUseCase } from '../usecases/find-profiles-by-id';
 
 @Injectable()
 export class UsersService {

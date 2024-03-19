@@ -1,4 +1,4 @@
-import { Profile } from '@features/pessoas/domain/entities/Profile.entity';
+import { Profile } from '@features/pessoas/domain/entities/profile.entity';
 import { EntitySchema } from 'typeorm';
 
 export const ProfileSchema = new EntitySchema<any>({

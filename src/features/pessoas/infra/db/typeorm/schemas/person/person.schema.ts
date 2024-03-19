@@ -1,5 +1,5 @@
 import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
-import { Pessoa } from '@features/pessoas/domain/entities/Person.entity';
+import { Pessoa } from '@features/pessoas/domain/entities/person.entity';
 import { EntitySchema } from 'typeorm';
 
 export const UserSchema = new EntitySchema<any>({

@@ -12,7 +12,7 @@ import { JwtServiceWrapper } from './infra/services/nest-jwt-service';
 import { SessionSerializer } from './infra/services/session.serializer';
 import { AuthenticatedGuard } from './infra/services/authentication.guard';
 import { SignInUseCase } from './application/usecases/signin.usecase';
-import { UsersService } from '@features/pessoas/application/person.service';
+import { UsersService } from '@features/pessoas/application/services/person.service';
 
 @Module({
   imports: [

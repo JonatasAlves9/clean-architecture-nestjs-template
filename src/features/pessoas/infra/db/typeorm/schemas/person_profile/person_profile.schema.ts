@@ -1,7 +1,7 @@
 // Schema para entidade PersonProfile
 import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
-import { Pessoa } from '@features/pessoas/domain/entities/Person.entity';
-import { Profile } from '@features/pessoas/domain/entities/Profile.entity';
+import { Pessoa } from '@features/pessoas/domain/entities/person.entity';
+import { Profile } from '@features/pessoas/domain/entities/profile.entity';
 import { EntitySchema } from 'typeorm';
 
 export const PersonProfileSchema = new EntitySchema<any>({
