@@ -25,7 +25,6 @@ export class UsersService {
   }
 
   async findByUsername(username: string): Promise<Pessoa | null> {
-    console.log(this.findUserByUsername.execute({ username }));
     return this.findUserByUsername.execute({ username });
   }
 

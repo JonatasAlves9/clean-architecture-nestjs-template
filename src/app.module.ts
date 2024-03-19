@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserSchema } from '@features/pessoas/infra/db/typeorm/schemas/person/person.schema';
 import { PersonProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/person_profile/person_profile.schema';
 import { ProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/profile/profile.schema';
+import { Argon2CryptService } from '@shared/services/argon2-crypt';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/profil
       inject: [ConfigService],
     }),
   ],
+  providers: [],
   controllers: [],
 })
 export class AppModule {}

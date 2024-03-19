@@ -1,12 +1,14 @@
 import { SignInUseCaseInterface } from '@features/auth/domain/usecases/signin.usecase';
 import { UsersService } from '@features/pessoas/application/services/person.service';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { CryptServiceContract } from '@shared/abstractions/crypt-service';
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
-import * as argon from 'argon2';
+
 export class SignInUseCase implements SignInUseCaseInterface {
   constructor(
     private usersService: UsersService,
     private readonly jwtService: JwtServiceContract,
+    private readonly cryptService: CryptServiceContract,
   ) {}
 
   async execute(username: string, password: string): Promise<any | null> {
@@ -16,7 +18,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       throw new NotFoundException('Usuário não encontrado');
     }
 
-    const match = await argon.verify(user.password, password);
+    const match = await this.cryptService.verify(user.password, password);
 
     if (!match) {
       throw new UnauthorizedException('Senha inválida');

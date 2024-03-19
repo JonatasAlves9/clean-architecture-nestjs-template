@@ -13,6 +13,8 @@ import { SessionSerializer } from './infra/services/session.serializer';
 import { AuthenticatedGuard } from './infra/services/authentication.guard';
 import { SignInUseCase } from './application/usecases/signin.usecase';
 import { UsersService } from '@features/pessoas/application/services/person.service';
+import { CryptServiceContract } from '@shared/abstractions/crypt-service';
+import { Argon2CryptService } from '@shared/services/argon2-crypt';
 
 @Module({
   imports: [
@@ -42,15 +44,17 @@ import { UsersService } from '@features/pessoas/application/services/person.serv
     },
     LocalStrategy,
     SessionSerializer,
+    Argon2CryptService,
     {
       provide: SignInUseCase,
       useFactory: (
         usersService: UsersService,
         jwtService: JwtServiceContract,
+        cryptService: CryptServiceContract,
       ) => {
-        return new SignInUseCase(usersService, jwtService);
+        return new SignInUseCase(usersService, jwtService, cryptService);
       },
-      inject: [UsersService, JwtService],
+      inject: [UsersService, JwtService, Argon2CryptService],
     },
   ],
   controllers: [AuthController, MenuController],
