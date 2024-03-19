@@ -11,6 +11,7 @@ export class PersonTypeOrmRepository implements PersonRepositoryInterface {
       .where('pessoa.username = :username', { username })
       .leftJoinAndSelect('pessoa.profiles', 'profiles')
       .leftJoinAndSelect('profiles.profile', 'profile')
+      .leftJoinAndSelect('profiles.entidade', 'entidade')
       .getOne();
   }
 }

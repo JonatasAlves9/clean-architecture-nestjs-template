@@ -1,10 +1,10 @@
-import { Organization } from '@features/organizations/domain/entities/Organization.entity';
+import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 import { EntitySchema as TypeORMSchema } from 'typeorm';
 
-export const EntitySchema = new TypeORMSchema<Organization>({
-  name: 'Entity',
+export const EntidadeSchema = new TypeORMSchema<Entidade>({
+  name: 'Entidade',
   tableName: 'entidade',
-  target: Organization,
+  target: Entidade,
   columns: {
     id: {
       type: Number,
@@ -55,7 +55,6 @@ export const EntitySchema = new TypeORMSchema<Organization>({
     site: {
       type: String,
     },
-
     ativo: {
       type: Boolean,
     },
@@ -108,4 +107,15 @@ export const EntitySchema = new TypeORMSchema<Organization>({
       type: Number,
     },
   },
+  // relations: {
+  //   profiles: {
+  //     type: 'many-to-many',
+  //     target: 'organization',
+  //     joinTable: {
+  //       name: 'pessoa_perfil',
+  //       joinColumn: { name: 'entidade_id' },
+  //       inverseJoinColumn: { name: 'id' },
+  //     },
+  //   },
+  // },
 });

@@ -3,12 +3,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 // Modules
 import { AuthModule } from '@features/auth/auth.module';
-import { OrganizationsModule } from '@features/organizations/organizations.module';
+import { OrganizationsModule } from '@features/entidade/organizations.module';
 import { UserSchema } from '@features/pessoas/infra/db/typeorm/schemas/person/person.schema';
 import { PersonProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/person_profile/person_profile.schema';
 import { ProfileSchema } from '@features/pessoas/infra/db/typeorm/schemas/profile/profile.schema';
 import { UsersModule } from '@features/pessoas/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/entity.schema';
 
 @Module({
   imports: [
@@ -28,7 +29,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [UserSchema, PersonProfileSchema, ProfileSchema],
+        entities: [
+          UserSchema,
+          ProfileSchema,
+          PersonProfileSchema,
+          EntidadeSchema,
+        ],
       }),
       inject: [ConfigService],
     }),

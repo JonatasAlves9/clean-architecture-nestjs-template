@@ -1,6 +1,7 @@
 import { BaseEntity } from '@shared/base/baseEntity';
 import { Profile } from '../entities/profile.entity';
-import { Organization } from '@features/organizations/domain/entities/Organization.entity';
+import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
+import { Pessoa } from '../entities/person.entity';
 
 export class PersonProfile extends BaseEntity {
   pessoa_id: number;
@@ -10,6 +11,7 @@ export class PersonProfile extends BaseEntity {
   semestre: string;
 
   // Relations
+  pessoa: Pessoa;
   profile: Profile;
-  entity: Organization;
+  entidade: Entidade;
 }

@@ -1,6 +1,7 @@
+import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
 import { BaseEntity } from '@shared/base/baseEntity';
 
-export class Organization extends BaseEntity {
+export class Entidade extends BaseEntity {
   tipo_entidade_id: number;
   cnpj: string;
   razao_social: string;
@@ -26,4 +27,7 @@ export class Organization extends BaseEntity {
   hashid: string;
   configuracoes: string;
   suporte: string;
+
+  // Relations
+  profiles: PersonProfile[];
 }

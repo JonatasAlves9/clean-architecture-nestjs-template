@@ -48,6 +48,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       }
     }
 
+    const entitiesIds = profiles.map((profile) => profile.entidade_id);
     const payload = { username: user.username, sub: user.id };
 
     return {
@@ -56,7 +57,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       name: user.nome,
       firstName: user.nome.split(' ')[0],
       photo: user.foto ? user.foto : null,
-      entitiesIds: 'TODO', //entitiesIds,
+      entitiesIds: entitiesIds,
       filterBySemester: 'TODO', //count(semesters) > 1,
       filterByCurricularUnit: 'TODO', //count(curricularUnits) > 1,
       activeProfile,

@@ -1,10 +1,11 @@
 // Schema para entidade PersonProfile
 import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
+import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 import { Pessoa } from '@features/pessoas/domain/entities/person.entity';
 import { Profile } from '@features/pessoas/domain/entities/profile.entity';
 import { EntitySchema } from 'typeorm';
 
-export const PersonProfileSchema = new EntitySchema<any>({
+export const PersonProfileSchema = new EntitySchema<PersonProfile>({
   name: 'PersonProfile',
   tableName: 'pessoa_perfil',
   target: PersonProfile,
@@ -46,6 +47,11 @@ export const PersonProfileSchema = new EntitySchema<any>({
       type: 'many-to-one',
       target: () => Profile,
       joinColumn: { name: 'perfil_id' },
+    },
+    entidade: {
+      type: 'many-to-one',
+      target: () => Entidade,
+      joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
     },
   },
 });
