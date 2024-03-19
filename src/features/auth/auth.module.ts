@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
 import { UsersModule } from '../pessoas/users.module';
-import { AuthService } from './application/auth.service';
+import { AuthService } from './application/services/auth.service';
 import { AuthController } from './presentation/controllers/auth.controller';
 import { MenuController } from './presentation/controllers/menu.controller';
 import { LocalStrategy } from './infra/services/local.strategy';
 import { JwtServiceWrapper } from './infra/services/nest-jwt-service';
 import { SessionSerializer } from './infra/services/session.serializer';
 import { AuthenticatedGuard } from './infra/services/authentication.guard';
+import { SignInUseCase } from './application/usecases/signin.usecase';
+import { UsersService } from '@features/pessoas/application/person.service';
 
 @Module({
   imports: [
@@ -40,6 +42,16 @@ import { AuthenticatedGuard } from './infra/services/authentication.guard';
     },
     LocalStrategy,
     SessionSerializer,
+    {
+      provide: SignInUseCase,
+      useFactory: (
+        usersService: UsersService,
+        jwtService: JwtServiceContract,
+      ) => {
+        return new SignInUseCase(usersService, jwtService);
+      },
+      inject: [UsersService, JwtService],
+    },
   ],
   controllers: [AuthController, MenuController],
 })

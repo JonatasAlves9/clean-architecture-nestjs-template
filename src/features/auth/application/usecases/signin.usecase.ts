@@ -1,20 +1,15 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { UsersService } from '../../pessoas/application/person.service';
+import { SignInUseCaseInterface } from '@features/auth/domain/usecases/signin.usecase';
+import { UsersService } from '@features/pessoas/application/person.service';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
 import * as argon from 'argon2';
-
-@Injectable()
-export class AuthService {
+export class SignInUseCase implements SignInUseCaseInterface {
   constructor(
     private usersService: UsersService,
     private readonly jwtService: JwtServiceContract,
   ) {}
 
-  async signIn(username: string, password: string) {
+  async execute(username: string, password: string): Promise<any | null> {
     const user = await this.usersService.findByUsername(username);
 
     if (!user) {
@@ -35,20 +30,5 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
       user,
     };
-  }
-
-  async getMenu() {
-    return [
-      {
-        title: 'Home',
-        url: '/home',
-        icon: 'home',
-      },
-      {
-        title: 'Users',
-        url: '/users',
-        icon: 'people',
-      },
-    ];
   }
 }
