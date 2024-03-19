@@ -9,6 +9,7 @@ import { PROFILE_TYPE } from '@shared/domain/value-objects/profile-type';
 // Abstractions
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
 import { CryptServiceContract } from '@shared/abstractions/crypt-service';
+import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 
 export class SignInUseCase implements SignInUseCaseInterface {
   constructor(
@@ -73,7 +74,17 @@ export class SignInUseCase implements SignInUseCaseInterface {
       name: personProfile.profile.nome,
       profileId: personProfile.profile.id,
       curso: 'TODO',
-      entity: personProfile.entidade,
+      entity: this.parseEntities(personProfile.entidade),
+    };
+  }
+
+  private parseEntities(entidade: Entidade) {
+    return {
+      id: entidade.hashid,
+      razaoSocial: entidade.razao_social,
+      nomeFantasia: entidade.nome_fantasia,
+      cnpj: entidade.cnpj,
+      email: entidade.email,
     };
   }
 }
