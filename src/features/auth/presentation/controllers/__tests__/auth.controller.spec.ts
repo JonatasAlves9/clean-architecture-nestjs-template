@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
-import { AuthService } from '../../application/auth.service';
+import { AuthController } from '../auth.controller';
+import { AuthService } from '../../../application/auth.service';
+import { SignInDTO } from '@features/auth/domain/dto/signin.dto';
 
 describe('AuthController', () => {
   let authController: AuthController;
@@ -25,7 +26,10 @@ describe('AuthController', () => {
   describe('signIn', () => {
     it('should call authService.signIn with the provided credentials', async () => {
       // Mock dos dados de entrada
-      const createAuthDto = { username: 'user', pass: 'password' };
+      const createAuthDto: SignInDTO = {
+        username: 'user',
+        password: 'password',
+      };
 
       // Mock do retorno de authService.signIn
       const signInResult = { access_token: 'access_token' };
@@ -37,7 +41,7 @@ describe('AuthController', () => {
       // Verificar se o método signIn de authService foi chamado com os parâmetros corretos
       expect(authServiceMock.signIn).toHaveBeenCalledWith(
         createAuthDto.username,
-        createAuthDto.pass,
+        createAuthDto.password,
       );
 
       // Verificar se o resultado retornado é o mesmo que o resultado mockado de authService.signIn
