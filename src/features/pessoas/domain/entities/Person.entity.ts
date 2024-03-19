@@ -51,4 +51,9 @@ export class Pessoa extends BaseEntity {
   valor_hora: number;
   dt_cadastro_app: Date;
   ip_cadastro_app: string;
+
+  constructor(pessoa: Partial<Pessoa>) {
+    super();
+    Object.assign(this, pessoa);
+  }
 }

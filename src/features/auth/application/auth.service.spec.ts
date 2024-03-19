@@ -1,5 +1,5 @@
 import { UsersService } from '@features/pessoas/application/person.service';
-import { Pessoa } from '@features/pessoas/domain/entities/Person';
+import { Pessoa } from '@features/pessoas/domain/entities/Person.entity';
 
 describe('UserService', () => {
   let userService: UsersService;

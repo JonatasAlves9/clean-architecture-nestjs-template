@@ -2,7 +2,7 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from '../../application/auth.service';
 import { SignInDTO } from '../../domain/dto/signin.dto';
 import { Public } from '@shared/decorators/public.decorator';
-import { LocalAuthGuard } from '../services/local.auth.guard';
+import { LocalAuthGuard } from '../../infra/services/local.auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -11,10 +11,8 @@ export class AuthController {
   @Public()
   @UseGuards(LocalAuthGuard)
   @Post('signin')
-  signIn(@Body() createAuthDto: SignInDTO) {
-    return this.authService.signIn(
-      createAuthDto.username,
-      createAuthDto.password,
-    );
+  signIn(@Body() signInDTO: SignInDTO) {
+    // TODO - Validar DTO
+    return this.authService.signIn(signInDTO.username, signInDTO.password);
   }
 }

@@ -1,7 +1,8 @@
-import { Pessoa } from '@features/pessoas/domain/entities/Person';
+import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
+import { Pessoa } from '@features/pessoas/domain/entities/Person.entity';
 import { EntitySchema } from 'typeorm';
 
-export const UserSchema = new EntitySchema<Pessoa>({
+export const UserSchema = new EntitySchema<any>({
   name: 'Pessoa',
   target: Pessoa,
   columns: {
@@ -169,6 +170,17 @@ export const UserSchema = new EntitySchema<Pessoa>({
     },
     ip_cadastro_app: {
       type: String,
+    },
+  },
+  relations: {
+    profiles: {
+      type: 'many-to-many',
+      target: () => PersonProfile,
+      joinTable: {
+        name: 'pessoa_perfil',
+        joinColumn: { name: 'pessoa_id' },
+        inverseJoinColumn: { name: 'id' },
+      },
     },
   },
 });
