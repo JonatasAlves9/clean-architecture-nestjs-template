@@ -4,4 +4,6 @@ export abstract class BaseEntity {
   updated_by: number | null;
   created_at: Date;
   updated_at: Date | null;
+  deleted_at: Date | null;
+  deleted_by: number;
 }
