@@ -1,10 +1,14 @@
-import { SignInUseCaseInterface } from '@features/auth/domain/usecases/signin.usecase';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common'; // TODO - Remove this line, implement your own exceptions
+
 import { UsersService } from '@features/pessoas/application/services/person.service';
+
+import { SignInUseCaseInterface } from '@features/auth/domain/usecases/signin.usecase';
 import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { CryptServiceContract } from '@shared/abstractions/crypt-service';
+import { PROFILE_TYPE } from '@shared/domain/value-objects/profile-type';
+
+// Abstractions
 import { JwtServiceContract } from '@shared/abstractions/jwt-service';
-import { ProfileType } from '@shared/domain/value-objects/profile-type';
+import { CryptServiceContract } from '@shared/abstractions/crypt-service';
 
 export class SignInUseCase implements SignInUseCaseInterface {
   constructor(
@@ -29,7 +33,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
     const profiles = user.profiles;
 
     const hasPermission = profiles.find((profile) => {
-      return profile.perfil_id === ProfileType.DIRECTOR;
+      return profile.perfil_id === PROFILE_TYPE.DIRECTOR;
     });
 
     if (!hasPermission) {
@@ -38,7 +42,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
 
     let activeProfile = null;
     for (let i = profiles.length - 1; i >= 0; i--) {
-      if (profiles[i].perfil_id === ProfileType.DIRECTOR) {
+      if (profiles[i].perfil_id === PROFILE_TYPE.DIRECTOR) {
         activeProfile = this.parseProfile(profiles[i]);
         break;
       }
@@ -59,11 +63,11 @@ export class SignInUseCase implements SignInUseCaseInterface {
     };
   }
 
-  private parseProfile(profiles: PersonProfile) {
+  private parseProfile(personProfile: PersonProfile) {
     return {
-      id: profiles.id,
-      name: profiles.profile.nome,
-      profileId: profiles.profile.id,
+      id: personProfile.id,
+      name: personProfile.profile.nome,
+      profileId: personProfile.profile.id,
       curso: 'TODO',
       entity: 'TODO',
     };

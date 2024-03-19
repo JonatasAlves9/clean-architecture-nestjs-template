@@ -1,4 +1,4 @@
-export enum ProfileType {
+export enum PROFILE_TYPE {
   ADMINISTRATOR = 1,
   DIRECTOR = 2,
   COORDINATOR = 5,
