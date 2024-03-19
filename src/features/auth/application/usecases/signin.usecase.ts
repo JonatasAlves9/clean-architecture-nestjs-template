@@ -20,7 +20,6 @@ export class SignInUseCase implements SignInUseCaseInterface {
   async execute(cpf: string, password: string): Promise<any | null> {
     const user = await this.usersService.findByUsername(cpf);
 
-    console.log(user?.profiles[0].entidade);
     if (!user || user.ativo === false) {
       throw new NotFoundException('Usuário não encontrado');
     }
@@ -52,6 +51,9 @@ export class SignInUseCase implements SignInUseCaseInterface {
     const entitiesIds = profiles.map((profile) => profile.entidade_id);
     const payload = { username: user.username, sub: user.id };
 
+    // Pegar todos os semestre de todos os perfis
+    const semesters = profiles.map((profile) => profile.entidade.semestres);
+
     return {
       access_token: this.jwtService.sign(payload),
       id: user.id,
@@ -59,7 +61,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       firstName: user.nome.split(' ')[0],
       photo: user.foto ? user.foto : null,
       entitiesIds: entitiesIds,
-      filterBySemester: 'TODO', //count(semesters) > 1,
+      filterBySemester: semesters.length > 1,
       filterByCurricularUnit: 'TODO', //count(curricularUnits) > 1,
       activeProfile,
     };
@@ -71,7 +73,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       name: personProfile.profile.nome,
       profileId: personProfile.profile.id,
       curso: 'TODO',
-      entity: 'TODO',
+      entity: personProfile.entidade,
     };
   }
 }
