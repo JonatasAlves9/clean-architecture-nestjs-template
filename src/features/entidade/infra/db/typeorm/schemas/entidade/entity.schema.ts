@@ -115,5 +115,11 @@ export const EntidadeSchema = new TypeORMSchema<Entidade>({
       inverseSide: 'entidade',
       joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
     },
+    perfis: {
+      type: 'one-to-many',
+      target: () => 'PersonProfile',
+      inverseSide: 'entidade',
+      joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
+    },
   },
 });
