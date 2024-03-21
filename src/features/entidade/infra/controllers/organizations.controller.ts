@@ -1,6 +1,6 @@
+import { OrganizationsService } from '@features/entidade/application/services/entidades/entidades.service';
 import { Controller, Get, Req } from '@nestjs/common';
 import { Request } from 'express';
-import { OrganizationsService } from '../../application/organizations.service';
 
 @Controller('organizations')
 export class OrganizationsController {

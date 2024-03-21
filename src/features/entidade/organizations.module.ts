@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { OrganizationsService } from './application/organizations.service';
 import { OrganizationsController } from './infra/controllers/organizations.controller';
 import { getDataSourceToken, TypeOrmModule } from '@nestjs/typeorm';
 import { EntidadeSchema } from './infra/db/typeorm/schemas/entidade/entity.schema';
@@ -9,12 +8,20 @@ import { DataSource } from 'typeorm';
 import { Entidade } from './domain/entities/entidade.entity';
 import { FindEntidadeWithAssociatedUserUseCase } from './application/usecases/find-entidade-with-associated-user.usecase';
 import { EntidadeRepositoryInterface } from './domain/repositories/entidade.repository';
+import { OrganizationsService } from './application/services/entidades/entidades.service';
+import { SemestreRepositoryInterface } from './domain/repositories/semestre.repository.interface';
+import { SemestreTypeOrmRepository } from './infra/db/typeorm/repositories/semestre-typeorm.repository';
+import { Semestre } from './domain/entities/semestre.entity';
+import { SemestreController } from './infra/controllers/semestre/semestre.controller';
+import { SemestreService } from './application/services/semestres/semestre.service';
+import { FindSemestreByEntidadeIdUseCase } from './application/usecases/find-semestre-by-entity-id.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntidadeSchema, SemestreSchema])],
-  controllers: [OrganizationsController],
+  controllers: [OrganizationsController, SemestreController],
   providers: [
     OrganizationsService,
+    SemestreService,
     {
       provide: EntidadeTypeOrmRepository,
       useFactory: (dataSource: DataSource) => {
@@ -25,11 +32,27 @@ import { EntidadeRepositoryInterface } from './domain/repositories/entidade.repo
       inject: [getDataSourceToken()],
     },
     {
+      provide: SemestreTypeOrmRepository,
+      useFactory: (dataSource: DataSource) => {
+        return new SemestreTypeOrmRepository(
+          dataSource.getRepository(Semestre),
+        );
+      },
+      inject: [getDataSourceToken()],
+    },
+    {
       provide: FindEntidadeWithAssociatedUserUseCase,
       useFactory: (entidadeRepo: EntidadeRepositoryInterface) => {
         return new FindEntidadeWithAssociatedUserUseCase(entidadeRepo);
       },
       inject: [EntidadeTypeOrmRepository],
+    },
+    {
+      provide: FindSemestreByEntidadeIdUseCase,
+      useFactory: (semestreRepo: SemestreRepositoryInterface) => {
+        return new FindSemestreByEntidadeIdUseCase(semestreRepo);
+      },
+      inject: [SemestreTypeOrmRepository],
     },
   ],
 })

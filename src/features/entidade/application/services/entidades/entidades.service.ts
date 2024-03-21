@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FindEntidadeWithAssociatedUserUseCase } from './usecases/find-entidade-with-associated-user.usecase';
-import { Entidade } from '../domain/entities/entidade.entity';
+import { FindEntidadeWithAssociatedUserUseCase } from '../../usecases/find-entidade-with-associated-user.usecase';
+import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 
 @Injectable()
 export class OrganizationsService {
