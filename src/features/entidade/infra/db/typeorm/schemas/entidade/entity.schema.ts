@@ -1,6 +1,7 @@
 import { Curso } from '@features/entidade/domain/entities/curso.entity';
 import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 import { Semestre } from '@features/entidade/domain/entities/semestre.entity';
+import { UnidadeCurricular } from '@features/entidade/domain/entities/unidades-curriculares.entity';
 import { EntitySchema as TypeORMSchema } from 'typeorm';
 
 export const EntidadeSchema = new TypeORMSchema<Entidade>({
@@ -113,6 +114,12 @@ export const EntidadeSchema = new TypeORMSchema<Entidade>({
     semestres: {
       type: 'one-to-many',
       target: () => Semestre,
+      inverseSide: 'entidade',
+      joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
+    },
+    unidades_curriculares: {
+      type: 'one-to-many',
+      target: () => UnidadeCurricular,
       inverseSide: 'entidade',
       joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
     },

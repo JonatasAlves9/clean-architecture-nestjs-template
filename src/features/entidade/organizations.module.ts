@@ -16,10 +16,16 @@ import { SemestreController } from './infra/controllers/semestre/semestre.contro
 import { SemestreService } from './application/services/semestres/semestre.service';
 import { FindSemestreByEntidadeIdUseCase } from './application/usecases/find-semestre-by-entity-id.usecase';
 import { CursoSchema } from './infra/db/typeorm/schemas/curso/curso.schema';
+import { UnidadeCurricularSchema } from './infra/db/typeorm/schemas/unidade-curricular/unidade-curricular.schema';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([EntidadeSchema, SemestreSchema, CursoSchema]),
+    TypeOrmModule.forFeature([
+      EntidadeSchema,
+      SemestreSchema,
+      CursoSchema,
+      UnidadeCurricularSchema,
+    ]),
   ],
   controllers: [OrganizationsController, SemestreController],
   providers: [

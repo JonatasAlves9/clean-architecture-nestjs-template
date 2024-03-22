@@ -54,6 +54,9 @@ export class SignInUseCase implements SignInUseCaseInterface {
 
     // Pegar todos os semestre de todos os perfis
     const semesters = profiles.map((profile) => profile.entidade.semestres);
+    const unidades_curriculares = profiles.map(
+      (profile) => profile.entidade.unidades_curriculares,
+    );
 
     return {
       access_token: this.jwtService.sign(payload),
@@ -63,7 +66,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
       photo: user.foto ? user.foto : null,
       entitiesIds: entitiesIds,
       filterBySemester: semesters.length > 1,
-      filterByCurricularUnit: 'TODO', //count(curricularUnits) > 1,
+      filterByCurricularUnit: unidades_curriculares.length > 1,
       activeProfile,
     };
   }

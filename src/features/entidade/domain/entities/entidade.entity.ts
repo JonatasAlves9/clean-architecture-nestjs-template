@@ -2,6 +2,7 @@ import { BaseEntity } from '@shared/base/baseEntity';
 import { Semestre } from './semestre.entity';
 import { PersonProfile } from '@features/pessoas/domain/aggregates/person-profile.aggregate';
 import { Curso } from './curso.entity';
+import { UnidadeCurricular } from './unidades-curriculares.entity';
 
 export class Entidade extends BaseEntity {
   tipo_entidade_id: number;
@@ -34,4 +35,5 @@ export class Entidade extends BaseEntity {
   semestres: Semestre[];
   perfis: PersonProfile[];
   cursos: Curso[];
+  unidades_curriculares: UnidadeCurricular[];
 }
