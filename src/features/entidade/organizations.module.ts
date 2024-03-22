@@ -17,6 +17,12 @@ import { SemestreService } from './application/services/semestres/semestre.servi
 import { FindSemestreByEntidadeIdUseCase } from './application/usecases/find-semestre-by-entity-id.usecase';
 import { CursoSchema } from './infra/db/typeorm/schemas/curso/curso.schema';
 import { UnidadeCurricularSchema } from './infra/db/typeorm/schemas/unidade-curricular/unidade-curricular.schema';
+import { UnidadesCurricularesRepository } from './infra/db/typeorm/repositories/unidade-curricular-typeorm.repository';
+import { UnidadeCurricular } from './domain/entities/unidades-curriculares.entity';
+import { UnidadeCurricularController } from './infra/controllers/unidade-curricular/unidade-curricular.controller';
+import { UnidadeCurricularService } from './application/services/unidade-curricular/unidade-curricular.service';
+import { FindUnidadeCurricularByEntidadeIdUseCase } from './application/usecases/find-unidade-curricular-by-entity-id.usecase';
+import { UnidadesCurricularesRepositoryInterface } from './domain/repositories/unidades-curriculares.repository.interface';
 
 @Module({
   imports: [
@@ -27,15 +33,29 @@ import { UnidadeCurricularSchema } from './infra/db/typeorm/schemas/unidade-curr
       UnidadeCurricularSchema,
     ]),
   ],
-  controllers: [OrganizationsController, SemestreController],
+  controllers: [
+    OrganizationsController,
+    SemestreController,
+    UnidadeCurricularController,
+  ],
   providers: [
     OrganizationsService,
     SemestreService,
+    UnidadeCurricularService,
     {
       provide: EntidadeTypeOrmRepository,
       useFactory: (dataSource: DataSource) => {
         return new EntidadeTypeOrmRepository(
           dataSource.getRepository(Entidade),
+        );
+      },
+      inject: [getDataSourceToken()],
+    },
+    {
+      provide: UnidadesCurricularesRepository,
+      useFactory: (dataSource: DataSource) => {
+        return new UnidadesCurricularesRepository(
+          dataSource.getRepository(UnidadeCurricular),
         );
       },
       inject: [getDataSourceToken()],
@@ -62,6 +82,17 @@ import { UnidadeCurricularSchema } from './infra/db/typeorm/schemas/unidade-curr
         return new FindSemestreByEntidadeIdUseCase(semestreRepo);
       },
       inject: [SemestreTypeOrmRepository],
+    },
+    {
+      provide: FindUnidadeCurricularByEntidadeIdUseCase,
+      useFactory: (
+        unidadeCurricularRepo: UnidadesCurricularesRepositoryInterface,
+      ) => {
+        return new FindUnidadeCurricularByEntidadeIdUseCase(
+          unidadeCurricularRepo,
+        );
+      },
+      inject: [UnidadesCurricularesRepository],
     },
   ],
 })
