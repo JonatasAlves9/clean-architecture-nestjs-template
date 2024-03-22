@@ -1,6 +1,6 @@
 import { BaseEntity } from '@shared/base/baseEntity';
 import { Semestre } from './semestre.entity';
-import { PersonProfile } from '@features/pessoas/domain/aggregates/PersonProfile.aggregate';
+import { PersonProfile } from '@features/pessoas/domain/aggregates/person-profile.aggregate';
 import { Curso } from './curso.entity';
 
 export class Entidade extends BaseEntity {
