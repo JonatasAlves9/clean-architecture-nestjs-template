@@ -11,6 +11,7 @@ import { UsersModule } from '@features/pessoas/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntidadeSchema } from '@features/entidade/infra/db/typeorm/schemas/entidade/entity.schema';
 import { SemestreSchema } from '@features/entidade/infra/db/typeorm/schemas/semestre/semestre.schema';
+import { CursoSchema } from '@features/entidade/infra/db/typeorm/schemas/curso/curso.schema';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { SemestreSchema } from '@features/entidade/infra/db/typeorm/schemas/seme
           PersonProfileSchema,
           EntidadeSchema,
           SemestreSchema,
+          CursoSchema,
         ],
       }),
       inject: [ConfigService],

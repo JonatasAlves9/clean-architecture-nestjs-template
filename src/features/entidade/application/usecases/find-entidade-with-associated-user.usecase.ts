@@ -8,6 +8,7 @@ export class FindEntidadeWithAssociatedUserUseCase
   constructor(private entidadeRepo: EntidadeRepositoryInterface) {}
 
   async execute(userId: string): Promise<Entidade[] | null> {
+    console.log(await this.entidadeRepo.findEntidadeWithAssociatedUser(userId));
     return this.entidadeRepo.findEntidadeWithAssociatedUser(userId);
   }
 }

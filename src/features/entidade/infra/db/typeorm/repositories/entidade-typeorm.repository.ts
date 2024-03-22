@@ -9,9 +9,10 @@ export class EntidadeTypeOrmRepository implements EntidadeRepositoryInterface {
   findEntidadeWithAssociatedUser(userId: string): Promise<Entidade[] | null> {
     return this.ormRepo
       .createQueryBuilder('entidade')
-      .leftJoin('entidade.perfis', 'perfis') // Assumindo que a propriedade na entidade Entidade que representa o relacionamento com a tabela intermediária é 'pessoaPerfis'
-      .leftJoin('perfis.pessoa', 'pessoa') // Assumindo que a propriedade na entidade PessoaPerfil que representa o relacionamento com Pessoa é 'pessoa'
+      .leftJoin('entidade.perfis', 'perfis')
+      .leftJoin('perfis.pessoa', 'pessoa')
       .where('pessoa.id = :userId', { userId })
+      .leftJoinAndSelect('entidade.cursos', 'cursos')
       .leftJoinAndSelect('entidade.semestres', 'semestres')
       .getMany();
   }

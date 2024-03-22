@@ -1,3 +1,4 @@
+import { Curso } from '@features/entidade/domain/entities/curso.entity';
 import { Entidade } from '@features/entidade/domain/entities/entidade.entity';
 import { Semestre } from '@features/entidade/domain/entities/semestre.entity';
 import { EntitySchema as TypeORMSchema } from 'typeorm';
@@ -120,6 +121,15 @@ export const EntidadeSchema = new TypeORMSchema<Entidade>({
       target: () => 'PersonProfile',
       inverseSide: 'entidade',
       joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
+    },
+    cursos: {
+      type: 'many-to-many',
+      target: () => Curso,
+      joinTable: {
+        name: 'entidade_curso',
+        joinColumn: { name: 'entidade_id', referencedColumnName: 'id' },
+        inverseJoinColumn: { name: 'curso_id', referencedColumnName: 'id' },
+      },
     },
   },
 });
