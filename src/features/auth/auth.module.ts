@@ -9,12 +9,12 @@ import { AuthController } from './presentation/controllers/auth.controller';
 import { MenuController } from './presentation/controllers/menu.controller';
 import { LocalStrategy } from './infra/services/local.strategy';
 import { JwtServiceWrapper } from './infra/services/nest-jwt-service';
-import { SessionSerializer } from './infra/services/session.serializer';
-import { AuthenticatedGuard } from './infra/services/authentication.guard';
 import { SignInUseCase } from './application/usecases/signin.usecase';
 import { UsersService } from '@features/pessoas/application/services/person.service';
 import { CryptServiceContract } from '@shared/abstractions/crypt-service';
 import { Argon2CryptService } from '@shared/services/argon2-crypt';
+import { AuthenticatedGuard } from './infra/services/authentication.guard';
+import { Session } from './infra/services/session.serializer';
 
 @Module({
   imports: [
@@ -43,7 +43,7 @@ import { Argon2CryptService } from '@shared/services/argon2-crypt';
       useClass: AuthenticatedGuard,
     },
     LocalStrategy,
-    SessionSerializer,
+    Session,
     Argon2CryptService,
     {
       provide: SignInUseCase,

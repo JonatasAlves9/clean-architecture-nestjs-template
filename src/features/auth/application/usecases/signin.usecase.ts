@@ -50,7 +50,7 @@ export class SignInUseCase implements SignInUseCaseInterface {
     }
 
     const entitiesIds = profiles.map((profile) => profile.entidade_id);
-    const payload = { username: user.username, sub: user.id };
+    const payload = { cpf: user.cpf, sub: user.id };
 
     // Pegar todos os semestre de todos os perfis
     const semesters = profiles.map((profile) => profile.entidade.semestres);

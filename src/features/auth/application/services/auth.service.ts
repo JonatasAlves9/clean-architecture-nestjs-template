@@ -5,8 +5,8 @@ import { SignInUseCase } from '../usecases/signin.usecase';
 export class AuthService {
   constructor(private signInUseCase: SignInUseCase) {}
 
-  async signIn(username: string, password: string) {
-    return await this.signInUseCase.execute(username, password);
+  async signIn(cpf: string, password: string) {
+    return await this.signInUseCase.execute(cpf, password);
   }
 
   async getMenu() {

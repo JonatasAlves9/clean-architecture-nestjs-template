@@ -1,4 +1,4 @@
 export class SignInDTO {
-  username: string;
+  cpf: string;
   password: string;
 }

@@ -27,7 +27,7 @@ describe('AuthController', () => {
     it('should call authService.signIn with the provided credentials', async () => {
       // Mock dos dados de entrada
       const createAuthDto: SignInDTO = {
-        username: 'user',
+        cpf: 'user',
         password: 'password',
       };
 
@@ -40,7 +40,7 @@ describe('AuthController', () => {
 
       // Verificar se o método signIn de authService foi chamado com os parâmetros corretos
       expect(authServiceMock.signIn).toHaveBeenCalledWith(
-        createAuthDto.username,
+        createAuthDto.cpf,
         createAuthDto.password,
       );
 
