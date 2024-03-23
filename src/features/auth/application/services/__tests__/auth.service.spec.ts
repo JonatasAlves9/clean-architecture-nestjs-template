@@ -16,7 +16,7 @@ describe('AuthService', () => {
   });
 
   describe('signIn', () => {
-    it('should call SignInUseCase.execute with provided username and password', async () => {
+    it('should call SignInUseCase.execute with provided cpf and password', async () => {
       // Arrange
       const cpf = '72265344010';
       const password = 'testpassword';
